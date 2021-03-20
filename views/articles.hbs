@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Статьи</title>
+</head>
+<body>
+<a href="/">на главную</a>
+<h1>Все статьи</h1>
+<a href="/articles/create">добавить статью</a>
+<a href="/articles/category">добавить категорию</a>
+<div class="card mb-3">
+    {{#each articles}}
+        <h4 class="card-header">{{this.title}}</h4>
+        <div class="card-body">
+            <p class="card-text">{{this.content}}</p>
+        </div>
+    {{/each}}
+</div>
+</body>
+</html>
