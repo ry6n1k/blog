@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/3438fe45-94f3-4297-8cca-353c706ce18b/resourceGroups/DefaultResourceGroup-CUS/providers/Microsoft.Web/sites/autosport-blog",
-    "appService.deploySubpath": "."
-}
