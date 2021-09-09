@@ -1,9 +1,16 @@
 import express from 'express'
+import mongoose from 'mongoose'
+import {router} from './routes/book'
 
 const app = express()
 
-app.get('/', (req, res) => {
-    res.send('welcome to typescript blog')
-})
+app.set('view engine', 'hbs')
 
-app.listen(3000)
+app.use('/api', router)
+
+mongoose.connect('mongodb://localhost:27017/blog_db', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+}, () => {
+    app.listen(3000)
+})
