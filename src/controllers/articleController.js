@@ -1,4 +1,4 @@
-const Article = require('../models/article')
+const Article = require('../article/model')
 
 /*exports.addArticle = (req, res) => {
     res.render('create.hbs')

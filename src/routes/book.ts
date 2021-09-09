@@ -2,8 +2,8 @@ import {Router} from "express"
 
 import controller from '../controllers/book'
 
-const router: Router = Router()
+const bookRouter: Router = Router()
 
-router.use('/', controller.getAllBooks)
+bookRouter.use('/', controller.getAllBooks)
 
-export {router}
+export {bookRouter}
