@@ -3,6 +3,7 @@ import controller from "./controller"
 
 const articleRouter: Router = Router()
 
-articleRouter.get('/', controller.show)
+articleRouter.post('/create', controller.store)
+articleRouter.get('/all', controller.show)
 
 export {articleRouter}
