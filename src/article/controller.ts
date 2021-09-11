@@ -1,6 +1,5 @@
 import {Request, Response} from "express"
 import Article from './model'
-import mongoose from "mongoose"
 
 const show = (req: Request, res: Response) => {
     Article.find({})
@@ -18,9 +17,28 @@ const show = (req: Request, res: Response) => {
         })
 }
 
+const get = (req: Request, res: Response) => {
+    Article.findById(req.params.id)
+        .exec()
+        .then(article => {
+            return res.render('article', {
+                article
+            })
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            })
+        })
+}
+
+const add = (req: Request, res: Response) => {
+    return res.render('create')
+}
+
 const store = (req: Request, res: Response) => {
     const article = new Article({
-        _id: new mongoose.Types._ObjectId(),
         title: req.body.title,
         content: req.body.content
     })
@@ -38,4 +56,4 @@ const store = (req: Request, res: Response) => {
         })
 }
 
-export default {show, store}
+export default {show, get, add, store}

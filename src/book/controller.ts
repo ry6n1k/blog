@@ -1,5 +1,4 @@
 import {NextFunction, Request, Response} from "express"
-import mongoose from "mongoose"
 import Book from "./model"
 
 const show = (req: Request, res: Response, next: NextFunction) => {
@@ -29,7 +28,6 @@ const get = (req: Request, res: Response) => {
 
 const store = (req: Request, res: Response) => {
     const book = new Book({
-        _id: new mongoose.Types.ObjectId(),
         title: req.body.title,
         author: req.body.author
     })

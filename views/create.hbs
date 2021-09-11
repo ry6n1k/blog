@@ -10,26 +10,18 @@
     <title>Добавление статьи</title>
 </head>
 <body>
-<a href="/">на главную</a>
+<a href="/article/all">на главную статтей</a>
 
-<form action="postArticle" method="post">
+<form action="/article/create" method="post">
     <div class="form-inner">
         <h3>Добавление статьи</h3>
         <label for="title">Название статьи</label>
         <input class="form-control" type="text" name="title" placeholder="Название">
-        <label for="category">Категория</label>
-        <select class="form-control mb-2" name="category">
-            <option selected disabled>--выберите категорию--</option>
-            {{#each categories}}
-                <option value="{{this.name}}">{{this.name}}</option>
-            {{/each}}
-        </select>
         <label for="content">Содержимое контента</label>
         <textarea class="form-control" name="content" placeholder="Содержимое" cols="30" rows="10"></textarea>
-        <input type="submit" value="Отправить">
+        <input type="submit" class="btn btn-success" value="Добавить">
     </div>
 </form>
 
-<a href="/articles">назад</a>
 </body>
 </html>
