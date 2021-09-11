@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from "body-parser"
@@ -14,15 +17,14 @@ app.use('/book', bookRouter)
 app.use('/article', articleRouter)
 
 app.get('/',(req, res) => {
-    // res.render('welcome')
-    res.send('typescript')
+    res.render('welcome')
 })
 
-mongoose.connect('mongodb://localhost:27017/blog_db', {
+mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 }, () => {
-    app.listen(3000)
+    app.listen(process.env.PORT)
 })
 
 module.exports.app = app
