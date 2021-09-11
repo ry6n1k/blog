@@ -56,4 +56,18 @@ const store = (req: Request, res: Response) => {
         })
 }
 
-export default {show, get, add, store}
+const destroy = (req: Request, res: Response) => {
+    Article.findById(req.params.id)
+        .exec()
+        .then(article => {
+            article.remove().then(r => res.redirect('/article/all'))
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            })
+        })
+}
+
+export default {show, get, add, store, destroy}
