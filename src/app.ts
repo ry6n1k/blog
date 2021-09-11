@@ -14,7 +14,8 @@ app.use('/book', bookRouter)
 app.use('/article', articleRouter)
 
 app.get('/',(req, res) => {
-    res.render('welcome')
+    // res.render('welcome')
+    res.send('typescript')
 })
 
 mongoose.connect('mongodb://localhost:27017/blog_db', {
@@ -23,3 +24,5 @@ mongoose.connect('mongodb://localhost:27017/blog_db', {
 }, () => {
     app.listen(3000)
 })
+
+module.exports.app = app
