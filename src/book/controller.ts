@@ -5,7 +5,7 @@ const show = (req: Request, res: Response, next: NextFunction) => {
     Book.find()
         .exec()
         .then(results => {
-            return res.status(200).json({
+            return res.render('book/books',{
                 books: results,
                 count: results.length
             })
@@ -26,6 +26,10 @@ const get = (req: Request, res: Response) => {
     })
 }
 
+const add = (req: Request, res: Response) => {
+    return res.render('book/create')
+}
+
 const store = (req: Request, res: Response) => {
     const book = new Book({
         title: req.body.title,
@@ -33,9 +37,7 @@ const store = (req: Request, res: Response) => {
     })
     return book.save()
         .then(result => {
-            return res.status(201).json({
-                book: result
-            })
+            return res.redirect('/book/all')
         })
         .catch(error => {
             return res.status(500).json({
@@ -45,4 +47,4 @@ const store = (req: Request, res: Response) => {
         })
 }
 
-export default {show, get, store}
+export default {show, get, add, store}
