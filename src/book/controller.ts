@@ -5,7 +5,7 @@ const show = (req: Request, res: Response, next: NextFunction) => {
     Book.find()
         .exec()
         .then(results => {
-            return res.render('book/books',{
+            return res.render('book/books', {
                 books: results,
                 count: results.length
             })
@@ -19,11 +19,20 @@ const show = (req: Request, res: Response, next: NextFunction) => {
 }
 
 const get = (req: Request, res: Response) => {
-    Book.find({id: req.params.id}, books => {
-        return res.status(200).json({
-            books
+    Book.findById(req.params.id)
+        .exec()
+        .then(book => {
+            return res.render('', {
+                book: book
+            })
         })
-    })
+        .catch(error => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            })
+        })
+
 }
 
 const add = (req: Request, res: Response) => {
@@ -47,4 +56,18 @@ const store = (req: Request, res: Response) => {
         })
 }
 
-export default {show, get, add, store}
+const destroy = (req: Request, res: Response) => {
+    Book.findById(req.params.id)
+        .exec()
+        .then(book => {
+            book.remove().then(r => res.redirect('/book/all'))
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            })
+        })
+}
+
+export default {show, get, add, store, destroy}
