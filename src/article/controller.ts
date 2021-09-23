@@ -56,6 +56,26 @@ const store = (req: Request, res: Response) => {
         })
 }
 
+const edit = (req: Request, res: Response) => {
+    Article.findById(req.params.id).then((article) => {
+        return res.render('update.hbs', {
+            article: article
+        })
+    })
+}
+
+const update = (req: Request, res: Response) => {
+    Article.findByIdAndUpdate(
+        req.params.id,
+        {
+            title: req.body.title,
+            content: req.body.title
+        }
+    ).then(() => {
+        return res.redirect('/')
+    })
+}
+
 const destroy = (req: Request, res: Response) => {
     Article.findById(req.params.id)
         .exec()
@@ -70,4 +90,4 @@ const destroy = (req: Request, res: Response) => {
         })
 }
 
-export default {show, get, add, store, destroy}
+export default {show, get, add, store, edit, update, destroy}
