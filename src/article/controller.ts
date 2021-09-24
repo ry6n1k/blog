@@ -59,7 +59,7 @@ const store = (req: Request, res: Response) => {
 const edit = (req: Request, res: Response) => {
     Article.findById(req.params.id).then((article) => {
         return res.render('update.hbs', {
-            article: article
+            article
         })
     })
 }

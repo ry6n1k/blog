@@ -23,7 +23,7 @@ const get = (req: Request, res: Response) => {
         .exec()
         .then(book => {
             return res.render('', {
-                book: book
+                book
             })
         })
         .catch(error => {
