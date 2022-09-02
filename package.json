@@ -6,6 +6,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "cyclic-dynamodb": "0.0.27",
     "express": "^4.17.1"
   },
   "devDependencies": {}
