@@ -12,7 +12,7 @@ app.set("view engine", "hbs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const run = async function () {
+app.get("/", async () => {
   let animals = db.collection("animals");
   let leo = await animals.set("leo", {
     type: "cat",
@@ -20,11 +20,6 @@ const run = async function () {
   });
   let item = await animals.get("leo");
   console.log(item);
-};
-
-app.get("/", (req, res) => {
-  run();
-  res.render("welcome");
 });
 
 module.exports.app = app;
