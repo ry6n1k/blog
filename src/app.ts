@@ -1,30 +1,30 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
-import express from 'express'
-import mongoose from 'mongoose'
-import bodyParser from "body-parser"
-import {bookRouter} from './book/router'
-import {articleRouter} from './article/router'
+import express from "express";
+import bodyParser from "body-parser";
 
-const app = express()
+const app = express();
+const CyclicDb = require("cyclic-dynamodb");
+const db = CyclicDb("beautiful-cow-sweatsuitCyclicDB");
 
-app.set('view engine', 'hbs')
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(bodyParser.json())
+app.set("view engine", "hbs");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.use('/book', bookRouter)
-app.use('/article', articleRouter)
+const run = async function () {
+  let animals = db.collection("animals");
+  let leo = await animals.set("leo", {
+    type: "cat",
+    color: "orange",
+  });
+  let item = await animals.get("leo");
+  console.log(item);
+};
 
-app.get('/',(req, res) => {
-    res.render('welcome')
-})
+app.get("/", (req, res) => {
+  run();
+  res.render("welcome");
+});
 
-mongoose.connect(process.env.MONGO_URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-}, () => {
-    app.listen(process.env.PORT)
-})
-
-module.exports.app = app
+module.exports.app = app;
