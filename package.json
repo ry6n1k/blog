@@ -6,8 +6,6 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cyclic-dynamodb": "0.0.27",
     "express": "^4.17.1"
   },
   "devDependencies": {}
