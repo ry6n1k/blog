@@ -5,15 +5,28 @@ exports.addUser = function (request, response) {
 };
 
 exports.getUsers = function (request, response) {
-  response.render("users.hbs", {
-    users: User.getAll(),
+  User.find({}, function (err, allUsers) {
+    if (err) {
+      console.log(err);
+      return response.sendStatus(400);
+    }
+    response.render("users.hbs", {
+      users: allUsers,
+    });
   });
 };
 
 exports.postUser = function (request, response) {
+  if (!request.body) {
+    return response.sendStatus(400);
+  }
   const userName = request.body.name;
   const userAge = request.body.age;
-  const user = new User(userName, userAge);
-  user.save();
-  response.redirect("/users");
+  const user = new User({ name: userName, age: userAge });
+  user.save(function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    response.redirect("/users");
+  });
 };

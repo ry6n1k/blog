@@ -1,16 +1,9 @@
-const users = [];
+const mongoose = require("mongoose");
 
-module.exports = class User {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
+const Schema = mongoose.Schema;
+const userSchema = new Schema({
+  name: String,
+  age: Number,
+});
 
-  save() {
-    users.push(this);
-  }
-
-  static getAll() {
-    return users;
-  }
-};
+module.exports = mongoose.model("User", userSchema);

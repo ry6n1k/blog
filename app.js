@@ -1,4 +1,5 @@
 const express = require("express");
+const { default: mongoose } = require("mongoose");
 
 const homeRouter = require("./home.router");
 const userRouter = require("./user.router");
@@ -17,6 +18,17 @@ app.use(function (request, response, next) {
   response.status(404).send("not found");
 });
 
-app.listen(port, () => {
-  console.log("start server ...");
-});
+mongoose.connect(
+  "mongodb://localhost:27017/usersdb",
+  {
+    useUnifiedTopology: true,
+  },
+  function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    app.listen(port, () => {
+      console.log("start server ...");
+    });
+  }
+);
